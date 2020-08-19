@@ -1,12 +1,13 @@
 "use strict";
 
 class choice {
-    win = [];
-    loss = [];
-    draw = [];
 
-    constructor(id = "choice" ) {
+    constructor(id = "choice") {
         this.id = id;
+        this.win = [];
+        this.loss = [];
+        this.draw = [];
+
     }
     addWin(...items) {
         let condition = "win";
@@ -45,14 +46,17 @@ class choice {
         }
     }
 }
+
+// TODO: add a newGame and gameSetup function
 class rpsAndMore {
+
     options = [];
-    players = 2;
+
     constructor(...items) {
-        this.addOptions(items);
+        this.addOptions(...items); //seems to be allowed to continue passing '...items'
     }
     addOptions(...items){
-        this.options = items[0];
+        this.options = items;
     }
     addPlayer(id){
         let element = document.createElement("div");
@@ -60,7 +64,6 @@ class rpsAndMore {
         element.innerHTML = id;
         for (let option of this.options){
             let btn = document.createElement("button");
-            console.log(option);
             btn.textContent = option.id;
             element.appendChild(btn);
         }
@@ -72,8 +75,25 @@ class rpsAndMore {
         }
     }
 }
-let rock = new choice("rock");
-let paper = new choice("paper");
-let scissors = new choice("scissors");
-let game = new rpsAndMore(rock,paper,scissors);
 
+//TODO: potentially add a player class;
+// add class/functions to handle RPS game logic;
+// way down the road: network capability;
+// ...
+// add more concise way to create a choice with the conditions on instancing
+let rock = new choice("rock");
+rock.addWin("scissors");
+rock.addLoss("paper");
+rock.addDraw("rock");
+
+let paper = new choice("paper");
+paper.addWin("rock");
+paper.addLoss("scissors");
+paper.addDraw("paper");
+
+let scissors = new choice("scissors");
+scissors.addWin("paper");
+scissors.addLoss("rock");
+scissors.addDraw("scissors");
+
+let game = new rpsAndMore(rock,paper,scissors);
