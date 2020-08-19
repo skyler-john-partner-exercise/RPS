@@ -2,90 +2,102 @@ class rpsChoice {
 
     constructor(id = "choice", ...conditions) {
         this.id = id;
-        this.conditions = conditions;
-        this.initializeConditions();
+        this.initializeConditions(conditions);
     }
 
-    initializeConditions() {
+    initializeConditions(conditions) {
+        this.conditions = conditions;
         this.winConditions = [];
         this.lossConditions = [];
         this.drawConditions = [];
 
-        let destination;
-
         for (let condition of this.conditions) {
-            let symbol = condition[0];
+            let symbol = condition.substring(0, 1);
 
-            switch (symbol) {
-                case ">":
-                    destination = this.winConditions;
-                    break;
-                case "<":
-                    destination = this.lossConditions;
-                    break;
-                case "=":
-                    destination = this.drawConditions;
-                    break;
-                default:
-                    console.log(symbol + "is an invalid condition in parseConditions()");
-            }
+            let destination = function(choice) {
+                switch (symbol) {
+                    case ">":
+                        return choice.winConditions;
+                    case "<":
+                        return choice.lossConditions;
+                    case "=":
+                        return choice.drawConditions;
+                    default:
+                        console.log(symbol + "is an invalid condition in parseConditions()");
+                }
+            }(this);
+
             destination.push(condition.substring(1));
         }
     }
 
-    addWin(...items) {
-        let condition = "win";
-        this.addCondition(condition, items);
+    winsAgainst(choice) {
+        return (this.winConditions.indexOf(choice.id) !== -1);
     }
 
-    addLoss(...items) {
-        let condition = "loss";
-        this.addCondition(condition, items);
+    losesAgainst(choice) {
+        return (this.lossConditions.indexOf(choice.id) !== -1);
     }
 
-    addDraw(...items) {
-        let condition = "draw";
-        this.addCondition(condition, items);
+    drawsAgainst(choice) {
+        return (this.drawConditions.indexOf(choice.id) !== -1);
     }
 
-    addCondition(condition, ...items) {
-        let array;
+    //TODO: re-evaluate the need for the functions below
+    //addWin(...items) {
+    //     let condition = "win";
+    //     this.addCondition(condition, items);
+    // }
+    //
+    // addLoss(...items) {
+    //     let condition = "loss";
+    //     this.addCondition(condition, items);
+    // }
+    //
+    // addDraw(...items) {
+    //     let condition = "draw";
+    //     this.addCondition(condition, items);
+    // }
+    //
+    // addCondition(condition, ...items) {
+    //     let destination;
+    //
+    //     switch (condition.toLowerCase()) {
+    //         case "win":
+    //             destination = this.winConditions;
+    //             break;
+    //         case "loss":
+    //             destination = this.lossConditions;
+    //             break;
+    //         case "draw":
+    //             destination = this.drawConditions;
+    //             break;
+    //         default:
+    //             console.log("You done f'ed up A-Aron");
+    //     }
+    //     for (let item of items) {
+    //         destination.push(item);
+    //     }
+    // }
 
-        switch (condition.toLowerCase()) {
-            case "win":
-                array = this.win;
-                break;
-            case "loss":
-                array = this.loss;
-                break;
-            case "draw":
-                array = this.draw;
-                break;
-            default:
-                console.log("You done f'ed up A-Aron");
-        }
-        for (let item of items) {
-            array.push(item);
-        }
-    }
 
-    //TODO: create function
-    // accepts exactly three array arguments, each array containing the id or other choices it wins/loses/draws to
-    addConditions(win, loss, draw) {
-        this.addWin(win);
-        this.addLoss(loss);
-        this.addDraw(draw);
-    }
+    //TODO: re-evaluate whether or not this code is necessary
+    //accepts exactly three array arguments, each array containing the id or other choices it wins/loses/draws to
+    // addConditions(win, loss, draw) {
+    //     this.addWin(win);
+    //     this.addLoss(loss);
+    //     this.addDraw(draw);
+    // }
 
-    static win(...conditions) {
-        return conditions;
-    }
-
-    static loss(...conditions) {
-        return conditions;
-    }
-
-    static draw(...conditions) {
-        return conditions;
-    }
+    // static win(...conditions) {
+    //     return conditions;
+    // }
+    //
+    // static loss(...conditions) {
+    //     return conditions;
+    // }
+    //
+    // static draw(...conditions) {
+    //     return conditions;
+    // }
 }
