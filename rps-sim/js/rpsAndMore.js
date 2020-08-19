@@ -33,29 +33,60 @@ class rpsAndMore {
         return this.options[randomNumber];
     }
 
+    //TODO: functions only account for a two-player game currently; need to make dynamic
     static whoWins(choiceOne, choiceTwo) {
-        if (choiceOne.winsAgainst(choiceTwo)) {
-            if (choiceTwo.losesAgainst(choiceOne)) {
-                return choiceOne;
-            } else {
-                console.log("There is a logic flaw in determining who won via rpsAndMore.whoWins()");
-            }
-        } else if (choiceOne.losesAgainst(choiceTwo)) {
-            if (choiceTwo.winsAgainst(choiceOne)) {
-                return choiceTwo;
-            } else {
-                console.log("There is a logic flaw in determining who won via rpsAndMore.whoWins()");
-            }
-        } else {
-            if (this.isADraw(choiceOne, choiceTwo)) {
-                return null;
-            } else {
-                console.log("There is a logic flaw in determining who won via rpsAndMore.whoWins()");
-            }
-        }
+        return this.verifiedWinner(choiceOne, choiceTwo);
     }
 
     static isADraw(choiceOne, choiceTwo) {
         return (choiceOne.drawsAgainst(choiceTwo) && choiceTwo.drawsAgainst(choiceOne))
+    }
+
+    // returns null intentionally on draw
+    static verifiedWinner(choiceOne, choiceTwo) {
+        if (choiceOne.winsAgainst(choiceTwo) && choiceTwo.losesAgainst(choiceOne)) {
+            return choiceOne;
+        } else if (choiceTwo.winsAgainst(choiceOne) && choiceOne.losesAgainst(choiceTwo)) {
+            return choiceTwo;
+        } else if (this.isADraw(choiceOne,choiceTwo)) {
+            return null;
+        } else {
+            console.log("No verified winner or draw could be determined");
+        }
+    }
+
+    simulateRound() {
+        let choiceOne = this.randomChoice();
+        let choiceTwo = this.randomChoice();
+        let result = rpsAndMore.verifiedWinner(choiceOne, choiceTwo);
+
+        if (result === choiceOne) {
+            return 1;
+        } else if (result === choiceTwo) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    simulateRounds(numberOfRounds) {
+        let stats = {
+            wins: 0,
+            losses: 0,
+            draws: 0,
+        };
+
+        for (let i = 1; i <= numberOfRounds; i++) {
+            let result = this.simulateRound();
+
+            if (result === 1) {
+                stats.wins++;
+            } else if (result === 2) {
+                stats.losses++;
+            } else {
+                stats.draws++;
+            }
+        }
+        return stats;
     }
 }
