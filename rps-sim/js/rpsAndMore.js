@@ -3,6 +3,8 @@ class rpsAndMore {
 
     options = [];
 
+    //TODO: add an array of player objects perhaps
+
     constructor(...items) {
         this.addOptions(...items); //seems to be allowed to continue passing '...items'
     }
@@ -11,6 +13,7 @@ class rpsAndMore {
         this.options = items;
     }
 
+    //TODO: add on-click ability
     addPlayer(id){
         let element = document.createElement("div");
         element.id = id;
@@ -58,33 +61,49 @@ class rpsAndMore {
     simulateRound() {
         let choiceOne = this.randomChoice();
         let choiceTwo = this.randomChoice();
-        let result = rpsAndMore.verifiedWinner(choiceOne, choiceTwo);
+        let outcome = rpsAndMore.verifiedWinner(choiceOne, choiceTwo);
+        let results = { playerOneChoice: choiceOne.id };
 
-        if (result === choiceOne) {
-            return 1;
-        } else if (result === choiceTwo) {
-            return 2;
+        if (outcome === choiceOne) {
+            results.winningPlayer = 1;
+        } else if (outcome === choiceTwo) {
+            results.winningPlayer = 2;
         } else {
-            return 0;
+            results.winningPlayer = 0;
         }
+
+        return results;
     }
 
     simulateRounds(numberOfRounds) {
         let stats = {
-            wins: 0,
-            losses: 0,
-            draws: 0,
+            rockWins: 0,
+            rockLosses: 0,
+            rockDraws: 0,
+            paperWins: 0,
+            paperLosses: 0,
+            paperDraws: 0,
+            scissorsWins: 0,
+            scissorsLosses: 0,
+            scissorsDraws: 0,
+            totalWins: 0,
+            totalLosses: 0,
+            totalDraws: 0,
         };
 
         for (let i = 1; i <= numberOfRounds; i++) {
             let result = this.simulateRound();
+            let winningPlayer = result.winningPlayer;
 
-            if (result === 1) {
-                stats.wins++;
-            } else if (result === 2) {
-                stats.losses++;
+            if (winningPlayer === 1) {
+                stats[result.playerOneChoice + "Wins"]++;
+                stats.totalWins++;
+            } else if (winningPlayer === 2) {
+                stats[result.playerOneChoice + "Losses"]++;
+                stats.totalLosses++;
             } else {
-                stats.draws++;
+                stats[result.playerOneChoice + "Draws"]++;
+                stats.totalDraws++;
             }
         }
         return stats;
