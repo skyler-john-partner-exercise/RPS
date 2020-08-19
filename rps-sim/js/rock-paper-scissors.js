@@ -5,21 +5,22 @@
 // way down the road: network capability;
 // ...
 // add more concise way to create a choice with the conditions on instancing
-let rock = new rpsChoice("rock");
+let rock = new rpsChoice("rock",
+    ">scissors",
+    "<paper",
+    "=rock",
+);
 
-//TODO: make a rock.addConditions(win, loss, draw) function
-rock.addWin("scissors");
-rock.addLoss("paper");
-rock.addDraw("rock");
+let paper = new rpsChoice("paper",
+    ">rock",
+    "<scissors",
+    "=paper",
+);
 
-let paper = new rpsChoice("paper");
-paper.addWin("rock");
-paper.addLoss("scissors");
-paper.addDraw("paper");
+let scissors = new rpsChoice("rock",
+    ">paper",
+    "<rock",
+    "=scissors",
+);
 
-let scissors = new rpsChoice("scissors");
-scissors.addWin("paper");
-scissors.addLoss("rock");
-scissors.addDraw("scissors");
-
-let game = new rpsAndMore(rock,paper,scissors);
+let game = new rpsAndMore(rock, paper, scissors);
