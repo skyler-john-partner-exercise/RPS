@@ -7,8 +7,8 @@ class choice {
         this.win = [];
         this.loss = [];
         this.draw = [];
-
     }
+
     addWin(...items) {
         let condition = "win";
         this.addCondition(condition,items);
@@ -62,9 +62,11 @@ class rpsAndMore {
     constructor(...items) {
         this.addOptions(...items); //seems to be allowed to continue passing '...items'
     }
+
     addOptions(...items){
         this.options = items;
     }
+
     addPlayer(id){
         let element = document.createElement("div");
         element.id = id;
