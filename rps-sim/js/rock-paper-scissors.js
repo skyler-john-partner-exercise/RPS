@@ -24,10 +24,9 @@ class choice {
         this.addCondition(condition,items);
     }
 
-    addCondition(...items) {
-        let array = [];
-        let condition = items[0];
-        let newItems = items[1];
+    addCondition(condition, ...items) {
+        let array;
+
         switch (condition) {
             case "win":
                 array = this.win;
@@ -41,11 +40,19 @@ class choice {
             default:
                 console.log("You done f'ed up A-Aron");
         }
-        for (let item of newItems) {
+        for (let item of items) {
             array.push(item);
         }
     }
+
+    //TODO: create function
+    // accepts exactly three array arguments, each array containing the id or other choices it wins/loses/draws to
+    addConditions(win, loss, draw) {
+
+    }
+
 }
+
 
 // TODO: add a newGame and gameSetup function
 class rpsAndMore {
@@ -82,6 +89,8 @@ class rpsAndMore {
 // ...
 // add more concise way to create a choice with the conditions on instancing
 let rock = new choice("rock");
+
+//TODO: make a rock.addConditions(win, loss, draw) function
 rock.addWin("scissors");
 rock.addLoss("paper");
 rock.addDraw("rock");
