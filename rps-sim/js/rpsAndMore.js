@@ -21,6 +21,28 @@ class rpsAndMore {
         for (let option of this.options){
             let btn = document.createElement("button");
             btn.textContent = option.id;
+            btn.onclick = function() {
+                let choice = this.textContent;
+                let div = document.getElementById(id);
+                let buttons = div.getElementsByTagName("button");
+                for (let btn of buttons) {
+                    if (btn.textContent !== choice) {
+                        btn.style.display = "none";
+                    } else {
+                        btn.disabled = true;
+                    }
+                }
+
+                console.log({
+                    player: id,
+                    choice: choice,
+                });
+                // return {
+                //     id: id,
+                //     text: choice,
+                // }
+            };
+
             element.appendChild(btn);
         }
         document.body.appendChild(element);

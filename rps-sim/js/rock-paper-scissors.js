@@ -17,3 +17,5 @@ let scissors = new rpsChoice("scissors",
 );
 
 let game = new rpsAndMore(rock, paper, scissors);
+game.addPlayers(2);
+// game.addPlayers(5);
