@@ -16,6 +16,9 @@ let scissors = new rpsChoice("scissors",
     ">paper", "<rock", "=scissors",
 );
 
-let game = new rpsAndMore(rock, paper, scissors);
-game.addPlayers(2);
-// game.addPlayers(5);
+// let game = new rpsGame(rock, paper, scissors);
+// game.addPlayers(2);
+// // game.addPlayers(5);
+
+let game = new rpsGame();
+console.log(game);
