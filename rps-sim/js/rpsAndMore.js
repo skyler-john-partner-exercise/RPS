@@ -2,8 +2,9 @@
 class rpsAndMore {
 
     options = [];
-
     //TODO: add an array of player objects perhaps
+    humanPlayers = [];
+    cpuPlayers = [];
 
     constructor(...items) {
         this.addOptions(...items); //seems to be allowed to continue passing '...items'
@@ -37,10 +38,6 @@ class rpsAndMore {
                     player: id,
                     choice: choice,
                 });
-                // return {
-                //     id: id,
-                //     text: choice,
-                // }
             };
 
             element.appendChild(btn);
