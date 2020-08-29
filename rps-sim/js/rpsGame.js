@@ -1,25 +1,46 @@
-// TODO: a game has players, rps matches, rules/options, handles game logic
+//TODO: a game has players, rps matches, rules/options, handles game logic
+// build to handle one-on-one, tournament, alternate rules (i.e. extreme RPS)
 class rpsGame {
 
-    players = [];
-    bots = []
-
     constructor(...items) {
+        this.participants = [];
+        this.ruleSets = new rpsRuleSets();
+    }
+
+    //contains which participants and rules
+    matchSetup(...items) {
 
     }
 
-    addPlayer() {
+    addRuleSet(...rules) {
+        this.ruleSets.addRules(new rpsRules(...rules));
     }
 
-    addPlayers() {
+    addPlayer(id) {
+        this.participants.push(new rpsPlayer(id));
     }
 
-    addBot() {
+    addPlayers(numOfPlayers){
+        for (let i = 1; i <= numOfPlayers; i++){
+            this.addPlayer("p" + (i + this.participants.length + 1));
+        }
     }
 
-    addBots() {
+    addBot(id) {
+        this.participants.push(new rpsBot(id));
     }
 
+    addBots(numOfBots){
+        for (let i = 1; i <= numOfBots; i++){
+            this.addBot("b" + (i + this.participants.length + 1));
+        }
+    }
 
-
+    addParticipant(id, isBot = false) {
+        if (isBot) {
+            this.addBot(id);
+        } else {
+            this.addPlayer(id);
+        }
+    }
 }

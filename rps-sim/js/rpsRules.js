@@ -1,17 +1,9 @@
 
 //handles game logic, determining winner
-class rpsRules {
+class rpsRules extends rpsOptions {
 
-    constructor() {
-        this.options = [];
-    }
-
-    addOptions(...items){
-        this.options = items;
-    }
-
-    addOption() {
-
+    constructor(...items) {
+        super(...items);
     }
 
     static whoWins(choiceOne, choiceTwo) {

@@ -19,6 +19,6 @@ let scissors = new rpsChoice("scissors",
 // let game = new rpsGame(rock, paper, scissors);
 // game.addPlayers(2);
 // // game.addPlayers(5);
-
 let game = new rpsGame();
+game.addRuleSet(rock, paper, scissors)
 console.log(game);
