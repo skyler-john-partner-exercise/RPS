@@ -10,16 +10,18 @@ class rpsGame {
 
     //contains participants and rules
     newMatch(id1, id2, ruleID="standard") {
-        let match = new rpsMatch(this.participants[id1], this.participants[id2], this.ruleSets.ruleSets[ruleID]);
+        let match = new rpsMatch(this.participants[id1], this.participants[id2], ruleID);
         this.matchesToRun.push(match);
     }
 
+    //TODO---create logic to evaluate game matches after p1 presses a button
+    // NOTE--this only handles single-player
     runMatches() {
-
+        let game = this;
         for (let index in this.matchesToRun) {
             let container = document.createElement("div")
             container.id = "container" + index;
-            container.innerText = "match" + Number(index + 1).toString();
+            container.innerText = "match" + (Number(index) + 1).toString();
             let match = this.matchesToRun[index];
 
             for (let player of Object.keys(match.contestants)) {
@@ -27,22 +29,31 @@ class rpsGame {
                 playerDiv.innerText = player;
                 playerDiv.id = player;
 
-                for (let option of match.rules.options) {
+                for (let option of this.optionsIn(match.rulesID)) {
                     let btn = document.createElement("button");
                     btn.textContent = option.id;
                     btn.onclick = function() {
-
-                        console.log(player, option);
-
+                        console.log(player, option.id);
+                        //TODO: function to simulate the rest
+                        game.restOfRound()
+                    }
+                    if (match.contestants[player].isBot === true) {
+                        btn.disabled = true;
                     }
                     playerDiv.appendChild(btn);
                 }
                 container.appendChild(playerDiv);
             }
-
             document.body.appendChild(container);
         }
+    }
 
+    restOfRound() {
+        console.log("rest of round");
+    }
+
+    optionsIn(rulesID) {
+        return this.ruleSets.ruleSets[rulesID].options;
     }
 
     addRuleSet(id, ...rules) {
@@ -65,7 +76,7 @@ class rpsGame {
 
     addBots(numOfBots){
         for (let i = 1; i <= numOfBots; i++){
-            this.addBot("b" + (i + this.participants.length + 1));
+            this.addBot("b" + i);
         }
     }
 

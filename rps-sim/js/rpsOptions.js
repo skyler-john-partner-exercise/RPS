@@ -2,9 +2,8 @@
 //an array of rpsChoices
 class rpsOptions {
 
-    options = [];
-
     constructor(...items) {
+        this.options = [];
         this.addChoices(...items);
     }
 
@@ -22,4 +21,8 @@ class rpsOptions {
         }
     }
 
+    randomChoice() {
+        let randomNumber = Math.floor(Math.random() * this.options.length)
+        return this.options[randomNumber];
+    }
 }

@@ -1,10 +1,10 @@
 //holds who is playing, and a rule set to play by
 class rpsMatch extends rpsContestants {
 
-    constructor(playerObj1, playerObj2, rulesObj) {
+    constructor(playerObj1, playerObj2, rulesID) {
         super();
         this.addContestants(playerObj1, playerObj2);
-        this.rules = rulesObj;
+        this.rulesID = rulesID;
     }
 
     addRules() {

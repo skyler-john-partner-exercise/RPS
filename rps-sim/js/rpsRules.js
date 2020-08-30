@@ -28,8 +28,4 @@ class rpsRules extends rpsOptions {
         }
     }
 
-    randomChoice() {
-        let randomNumber = Math.floor(Math.random() * this.options.length)
-        return this.options[randomNumber];
-    }
 }
