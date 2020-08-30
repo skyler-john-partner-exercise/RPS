@@ -1,10 +1,10 @@
 class rpsRuleSets {
-    constructor(...ruleSets) {
-        this.ruleSets = ruleSets;
+    constructor() {
+        this.ruleSets = {};
     }
 
     //takes in an rpsRules object
     addRules(rules) {
-        this.ruleSets.push(rules);
+        this.ruleSets[rules.id] = rules;
     }
 }

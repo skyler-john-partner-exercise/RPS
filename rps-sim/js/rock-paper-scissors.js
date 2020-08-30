@@ -16,9 +16,10 @@ let scissors = new rpsChoice("scissors",
     ">paper", "<rock", "=scissors",
 );
 
-// let game = new rpsGame(rock, paper, scissors);
-// game.addPlayers(2);
-// // game.addPlayers(5);
 let game = new rpsGame();
-game.addRuleSet(rock, paper, scissors)
+game.addRuleSet("standard", rock, paper, scissors)
+game.addPlayers(4);
+game.newMatch("p1", "p2");
+game.newMatch("p3", "p4");
+game.runMatches();
 console.log(game);

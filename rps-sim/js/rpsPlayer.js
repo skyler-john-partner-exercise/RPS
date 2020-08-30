@@ -4,9 +4,7 @@ class rpsPlayer {
         this.id = id;
     }
 
-
 }
-
 
 class rpsBot extends rpsPlayer {
 
