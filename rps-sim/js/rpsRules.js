@@ -18,9 +18,9 @@ class rpsRules extends rpsOptions {
     // returns null intentionally on draw
     static verifiedWinner(choiceOne, choiceTwo) {
         if (choiceOne.winsAgainst(choiceTwo) && choiceTwo.losesAgainst(choiceOne)) {
-            return choiceOne;
+            return true;
         } else if (choiceTwo.winsAgainst(choiceOne) && choiceOne.losesAgainst(choiceTwo)) {
-            return choiceTwo;
+            return false;
         } else if (this.isADraw(choiceOne,choiceTwo)) {
             return null;
         } else {

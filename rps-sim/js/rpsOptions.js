@@ -1,14 +1,10 @@
 
-//an array of rpsChoices
+//an array of rpsChoice elements
 class rpsOptions {
 
     constructor(...items) {
         this.options = [];
         this.addChoices(...items);
-    }
-
-    get length() {
-        return this.options.length;
     }
 
     addChoices(...items){

@@ -35,7 +35,7 @@ class rpsGame {
                     btn.onclick = function() {
                         console.log(player, option.id);
                         //TODO: function to simulate the rest
-                        game.restOfRound()
+                        game.restOfRound(option);
                     }
                     if (match.contestants[player].isBot === true) {
                         btn.disabled = true;
@@ -48,8 +48,10 @@ class rpsGame {
         }
     }
 
-    restOfRound() {
-        console.log("rest of round");
+    restOfRound(option) {
+        let otherChoice = this.randomChoice();
+        console.log("p1", option.id, "p2", otherChoice.id);
+        console.log(rpsRules.verifiedWinner(option, otherChoice));
     }
 
     optionsIn(rulesID) {
@@ -86,5 +88,9 @@ class rpsGame {
         } else {
             this.addPlayer(id);
         }
+    }
+
+    randomChoice(rulesID = "standard") {
+        return this.ruleSets.ruleSets[rulesID].randomChoice();
     }
 }

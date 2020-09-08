@@ -19,8 +19,8 @@ let scissors = new rpsChoice("scissors",
 let game = new rpsGame();
 game.addRuleSet("standard", rock, paper, scissors)
 game.addPlayer("p1");
-game.addBots(3);
+game.addBot("b1");
 game.newMatch("p1", "b1");
-game.newMatch("b2", "b3");
+// game.newMatch("b2", "b3");
 game.runMatches();
 console.log(game);
